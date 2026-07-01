@@ -1,0 +1,301 @@
+@import "tailwindcss";
+
+/* ==========================================
+   🌸 LUXEA BEAUTY DESIGN SYSTEM
+========================================== */
+
+:root {
+  /* 🎨 Brand Colors */
+  --color-primary: #a35d6a;
+  --color-primary-hover: #8e4e5c;
+  --color-primary-light: #f8eef1;
+
+  --color-secondary: #e8cfcf;
+  --color-accent: #d4af8c;
+
+  /* 🌤 Background */
+  --background: #fcfaf9;
+  --foreground: #2e2a2b;
+
+  --color-surface: rgba(255, 255, 255, 0.72);
+
+  /* ✍ Text */
+  --color-text: #2e2a2b;
+  --color-text-secondary: #7b6d70;
+
+  /* 📦 Border */
+  --color-border: rgba(163, 93, 106, 0.12);
+
+  /* 🚦 Status */
+  --color-success: #5c9f74;
+  --color-warning: #e6b85c;
+  --color-danger: #d45c5c;
+
+  /* 🔘 Radius */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+
+  /* 🌫 Shadow */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 12px 40px rgba(163, 93, 106, 0.08);
+  --shadow-lg: 0 24px 80px rgba(163, 93, 106, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ==========================================
+   🌍 Base
+========================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--color-text);
+  font-family: var(--font-geist-sans), "Inter", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+/* ==========================================
+   ✨ Typography
+========================================== */
+
+.font-display {
+  font-family: var(--font-geist-sans);
+  font-weight: 700;
+  letter-spacing: -.03em;
+}
+
+/* ==========================================
+   🔘 Buttons
+========================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: .5rem;
+
+  min-height: 46px;
+
+  padding: 0 24px;
+
+  border-radius: var(--radius-md);
+
+  border: none;
+
+  font-weight: 600;
+
+  transition: all .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+  background: #f2dde3;
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,.55);
+
+  backdrop-filter: blur(24px);
+
+  -webkit-backdrop-filter: blur(24px);
+
+  border: 1px solid rgba(255,255,255,.5);
+
+  color: var(--color-text);
+}
+
+/* ==========================================
+   🪟 Glass Card
+========================================== */
+
+.glass {
+  background: rgba(255,255,255,.68);
+
+  backdrop-filter: blur(24px);
+
+  -webkit-backdrop-filter: blur(24px);
+
+  border: 1px solid rgba(255,255,255,.55);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-md);
+}
+
+/* ==========================================
+   📦 Product Card
+========================================== */
+
+.product-card {
+  background: white;
+
+  border-radius: var(--radius-lg);
+
+  border: 1px solid var(--color-border);
+
+  box-shadow: var(--shadow-sm);
+
+  overflow: hidden;
+
+  transition: all .35s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==========================================
+   🎨 Color Swatch
+========================================== */
+
+.color-dot {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 999px;
+
+  border: 2px solid white;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.color-dot:hover {
+  transform: scale(1.12);
+}
+
+.color-dot.active {
+  outline: 3px solid var(--color-primary);
+}
+
+/* ==========================================
+   ❤️ Wishlist
+========================================== */
+
+.wishlist-btn {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 999px;
+
+  border: none;
+
+  background: rgba(255,255,255,.85);
+
+  backdrop-filter: blur(20px);
+
+  transition: .3s;
+}
+
+.wishlist-btn:hover {
+  background: var(--color-primary);
+
+  color: white;
+}
+
+/* ==========================================
+   🎁 Premium Badge
+========================================== */
+
+.badge-premium {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  background: var(--color-accent);
+
+  color: #4b3b33;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+/* ==========================================
+   📜 Scrollbar
+========================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7eef0;
+}
+
+/* ==========================================
+   ✨ Animations
+========================================== */
+
+.fade-up {
+  animation: fadeUp .45s ease;
+}
+
+@keyframes fadeUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
