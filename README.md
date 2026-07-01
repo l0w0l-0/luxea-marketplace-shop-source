@@ -7,9 +7,9 @@
 
 | ชื่อ | ตำแหน่ง | หน้าที่ |
 |------|---------|----------|
-| **เปมิกา** | 👩‍💼 Project Manager / UI-UX Designer | วางแผนโครงการ, ออกแบบ Wireframe และ UI/UX, จัดทำเอกสารโครงงาน, ตรวจสอบความถูกต้องของงาน และประสานงานภายในทีม |
-| **วรัตถา** | 💻 Front-end Developer | พัฒนาเว็บไซต์ส่วน Front-end ด้วย Next.js, React และ Tailwind CSS, ออกแบบหน้าเว็บไซต์, ปรับแต่ง Responsive และทดสอบการใช้งาน |
-| **ภัทรพล** | ⚙️ Back-end Developer / Git Manager | พัฒนาระบบ Back-end และฐานข้อมูล, จัดการ GitHub Repository และ SourceTree, ดูแลการ Commit, Push, Pull, Branch และ Merge รวมถึงการรวมโค้ดของทีม |
+| **เปมิกา เมฆลอย 67167033 ** | 👩‍💼 Project Manager / UI-UX Designer | วางแผนโครงการ, ออกแบบ Wireframe และ UI/UX, จัดทำเอกสารโครงงาน, ตรวจสอบความถูกต้องของงาน และประสานงานภายในทีม |
+| **วรัตถา เตนากุล 67133846** | 💻 Front-end Developer | พัฒนาเว็บไซต์ส่วน Front-end ด้วย Next.js, React และ Tailwind CSS, ออกแบบหน้าเว็บไซต์, ปรับแต่ง Responsive และทดสอบการใช้งาน |
+| **ภัทรพล ถ่อมดี 67180663 ** | ⚙️ Back-end Developer / Git Manager | พัฒนาระบบ Back-end และฐานข้อมูล, จัดการ GitHub Repository และ SourceTree, ดูแลการ Commit, Push, Pull, Branch และ Merge รวมถึงการรวมโค้ดของทีม |
 
 ---
 
