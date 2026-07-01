@@ -3,6 +3,42 @@
 แอปพลิเคชันร้านค้าออนไลน์เครื่องสำอาง สไตล์ Shopee สร้างด้วย **Next.js App Router** พร้อมระบบสมัครสมาชิก/ล็อกอิน ตะกร้าสินค้า เช็คเอาต์ ระบบแต้มสะสม และหน้าแอดมินจัดการสต็อก
 
 ---
+// roles.ts
+// ตารางกลุ่มสมาชิก / ตำแหน่งในระบบ LUXÉA Beauty
+// ช่อง "หน้าที่" เว้นว่างไว้ให้กรอกเพิ่มเติมเอง
+
+export type Role = {
+  id: string;            // รหัสกลุ่ม
+  groupName: string;     // ชื่อกลุ่มสมาชิก
+  roleField: string;     // ค่าที่เก็บใน field role/tier ของระบบ
+  accessLevel: string;   // สิทธิ์การเข้าถึงระบบ
+  duty: string;          // 👈 หน้าที่ความรับผิดชอบ (เว้นว่างไว้ให้กรอกเอง)
+};
+
+export const roles: Role[] = [
+  {
+    id: "member",
+    groupName: "ลูกค้าทั่วไป",
+    roleField: 'role: "customer", tier: "Member"',
+    accessLevel: "ดูสินค้า, สั่งซื้อ, ดูประวัติออเดอร์ตัวเอง",
+    duty: "", // <-- กรอกหน้าที่ตรงนี้
+  },
+  {
+    id: "vip",
+    groupName: "ลูกค้า VIP",
+    roleField: 'role: "customer", tier: "VIP"',
+    accessLevel: "เหมือน Member (แต้มสะสมครบ 1,000 อัปเกรดอัตโนมัติ)",
+    duty: "", // <-- กรอกหน้าที่ตรงนี้
+  },
+  {
+    id: "admin",
+    groupName: "แอดมิน",
+    roleField: 'role: "admin"',
+    accessLevel: "ดูสินค้า, สั่งซื้อ, แก้ไขราคา/สต็อกสินค้า",
+    duty: "", // <-- กรอกหน้าที่ตรงนี้
+  },
+];
+---
 
 ## ✨ ฟีเจอร์หลัก
 
