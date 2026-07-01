@@ -3,10 +3,39 @@
 แอปพลิเคชันร้านค้าออนไลน์เครื่องสำอาง สไตล์ Shopee สร้างด้วย **Next.js App Router** พร้อมระบบสมัครสมาชิก/ล็อกอิน ตะกร้าสินค้า เช็คเอาต์ ระบบแต้มสะสม และหน้าแอดมินจัดการสต็อก
 
 ---
-##  👭 สมาชิคกลุ่ม / หน้าที่ 
--  นส. เปมิกา เมฆลอย - 67167033 ( หน้าที อะไรไม่รู้ )
--  นส. วรัตถา เตนากุล  - 67133846( หน้าที อะไรไม่รู้ ) 
--  น.  ภัทรพล ถ่อมดี   - 67180663 ( หน้าที อะไรไม่รู้ )
+# 👥 Team Members and Responsibilities
+
+| ชื่อ | ตำแหน่ง | หน้าที่ |
+|------|---------|----------|
+| **เปมิกา** | 👩‍💼 Project Manager / UI-UX Designer | วางแผนโครงการ, ออกแบบ Wireframe และ UI/UX, จัดทำเอกสารโครงงาน, ตรวจสอบความถูกต้องของงาน และประสานงานภายในทีม |
+| **วรัตถา** | 💻 Front-end Developer | พัฒนาเว็บไซต์ส่วน Front-end ด้วย Next.js, React และ Tailwind CSS, ออกแบบหน้าเว็บไซต์, ปรับแต่ง Responsive และทดสอบการใช้งาน |
+| **ภัทรพล** | ⚙️ Back-end Developer / Git Manager | พัฒนาระบบ Back-end และฐานข้อมูล, จัดการ GitHub Repository และ SourceTree, ดูแลการ Commit, Push, Pull, Branch และ Merge รวมถึงการรวมโค้ดของทีม |
+
+---
+
+## 📋 Responsibility Summary
+
+### 👩‍💼 เปมิกา
+- Project Planning
+- UI/UX Design
+- Wireframe Design
+- Documentation
+- Team Coordination
+
+### 💻 วรัตถา
+- Front-end Development
+- Responsive Design
+- Component Development
+- User Interface Testing
+
+### ⚙️ ภัทรพล
+- Back-end Development
+- Database Management
+- GitHub Repository Management
+- SourceTree Workflow
+- Commit / Push / Pull
+- Branch & Merge Management
+
 ---
 
 ## ✨ ฟีเจอร์หลัก
