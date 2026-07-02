@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getDatabase, nextId, Order } from "@/src/backend/store";
+import { calculateCartTotals, calculateLoyaltyPoints } from "@/src/shared/commerce";
 
 type CheckoutItem = {
   productId: string;
@@ -60,10 +61,15 @@ export async function POST(request: Request) {
     }
   }
 
-  const total = orderItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
+  const totals = calculateCartTotals({
+    items: orderItems.map((item) => ({
+      unitPrice: item.price,
+      quantity: item.quantity,
+    })),
+  });
+  const subtotal = totals.subtotal;
+  const shippingFee = totals.shipping;
+  const total = totals.total;
   const status =
     paymentMethod === "Bank Transfer"
       ? "waiting_payment"
@@ -75,13 +81,15 @@ export async function POST(request: Request) {
     userId: user.id,
     customerName: user.name,
     items: orderItems,
+    subtotal,
+    shippingFee,
     total,
     paymentMethod: String(paymentMethod || "Credit Card"),
     status,
     createdAt: new Date().toISOString(),
   };
 
-  user.points += Math.floor(total / 20);
+  user.points += calculateLoyaltyPoints(total);
   if (user.points >= 1000) {
     user.tier = "VIP";
   }
