@@ -67,3 +67,72 @@ export function calculateLoyaltyPoints(
   const unit = Math.max(1, Math.floor(loyaltyPointUnitBaht));
   return Math.floor(Math.max(0, Number(orderTotal) || 0) / unit);
 }
+
+// --- Formatting Utilities ---
+
+export function formatMoney(amount: number) {
+  return `฿${amount.toLocaleString("th-TH")}`;
+}
+
+export function formatOrderStatus(
+  status:
+    | "paid"
+    | "waiting_payment"
+    | "cod"
+    | "processing"
+    | "shipped"
+    | "completed"
+    | "cancelled",
+) {
+  if (status === "waiting_payment") return "รอชำระ";
+  if (status === "paid") return "ชำระแล้ว";
+  if (status === "cod") return "ปลายทาง";
+  if (status === "processing") return "กำลังเตรียมของ";
+  if (status === "shipped") return "จัดส่งแล้ว";
+  if (status === "completed") return "สำเร็จ";
+  return "ยกเลิก";
+}
+
+// --- Image Utilities ---
+
+export function normalizeImageUrl(url: string) {
+  if (!url) return url;
+  return url.replaceAll("text-to-image", "text_to_image");
+}
+
+export function getImageSrc(url: string) {
+  const normalized = normalizeImageUrl(url);
+  if (!normalized) return normalized;
+  if (normalized.startsWith("/")) return normalized;
+  if (!/^https?:\/\//.test(normalized)) return normalized;
+  return `/api/image?url=${encodeURIComponent(normalized)}`;
+}
+
+// --- File Download Utility ---
+
+export function downloadTextFile(
+  filename: string,
+  content: string,
+  mime: string,
+) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+// --- HTML Escaping Utility ---
+
+export function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
