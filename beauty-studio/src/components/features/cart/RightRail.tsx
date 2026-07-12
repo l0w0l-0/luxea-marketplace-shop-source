@@ -1,35 +1,9 @@
-/*
-==================================================
-ไฟล์: components/features/cart/RightRail.tsx
-
-หน้าที่:
-แถบด้านข้างขวาแสดงตะกร้าและบัญชี
-
-ใช้สำหรับ:
-- หน้า Home
-
-ทำงานร่วมกับ:
-- BeautyShopApp
-- Utils (formatMoney, getImageSrc)
-- Cart Types, User Types, Order Types
-
-หมายเหตุ:
-แสดงเฉพาะบน Desktop (lg:block) แบบ Sticky
-==================================================
-*/
-
 "use client";
+import { getImageSrc, formatMoney } from "@/src/utils";
 
-import { CartItem, Product, User, Order } from "@/src/types";
-import { formatMoney, getImageSrc } from "@/src/utils";
+import type { ReactNode } from "react";
+import type { CartItem, Product, User, Order } from "@/src/types";
 
-/**
- * แถบด้านข้างขวา
- *
- * จุดประสงค์: แสดงบัญชี ตะกร้า และโค้ดส่วนลด
- * Input: cart, products, total, shipping, grandTotal, user, orders, setView
- * Output: JSX Element
- */
 export function RightRail({
   cart,
   products,
@@ -65,7 +39,7 @@ export function RightRail({
               >
                 {user.tier}
               </span>
-              <span>{"\u00B7"} {user.points} points</span>
+              <span>· {user.points} points</span>
             </div>
           </div>
         ) : (
@@ -122,7 +96,7 @@ export function RightRail({
                       {product.name}
                     </p>
                     <p className="text-xs text-[var(--color-text-secondary)] truncate">
-                      {color?.name ?? "-"} {"\u00B7"} x{item.quantity}
+                      {color?.name ?? "-"} · x{item.quantity}
                     </p>
                   </div>
                   <p className="text-sm font-black text-[var(--color-primary)]">
@@ -136,7 +110,7 @@ export function RightRail({
         <div className="mt-4 border-t border-[var(--color-border)] pt-4 space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-[var(--color-text-secondary)]">สินค้า</span>
-            <span className="font-medium">{formatMoney(total)}</span>
+            <span className="font-medium">฿{total}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-[var(--color-text-secondary)]">
@@ -160,7 +134,7 @@ export function RightRail({
           </div>
           <div className="flex justify-between text-lg font-black">
             <span>รวม</span>
-            <span className="text-[var(--color-primary)]">{formatMoney(grandTotal)}</span>
+            <span className="text-[var(--color-primary)]">฿{grandTotal}</span>
           </div>
           <button
             className="btn btn-primary w-full mt-4"
@@ -180,7 +154,7 @@ export function RightRail({
             LUXEA10
           </p>
           <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
-            ลดเพิ่ม 10% เมื่อสั่งซื้อขั้นต่ำ {"\u0E3F"}500
+            ลดเพิ่ม 10% เมื่อสั่งซื้อขั้นต่ำ ฿500
           </p>
         </div>
         <button className="btn btn-secondary w-full mt-4" onClick={() => setView("checkout")}>
@@ -191,19 +165,13 @@ export function RightRail({
   );
 }
 
-/**
- * Panel wrapper component
- *
- * จุดประสงค์: สร้าง Card section ที่มีหัวข้อ
- * Input: title, children
- * Output: JSX Element
- */
-export function Panel({
+
+function Panel({
   title,
   children,
 }: {
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <section className="glass p-6">
@@ -214,3 +182,4 @@ export function Panel({
     </section>
   );
 }
+

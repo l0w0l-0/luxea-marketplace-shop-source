@@ -1,36 +1,10 @@
-/*
-==================================================
-ไฟล์: components/features/products/ProductShelf.tsx
-
-หน้าที่:
-แสดงรายการสินค้าในรูปแบบ Grid
-
-ใช้สำหรับ:
-- หน้า Home
-- หน้า Shop
-
-ทำงานร่วมกับ:
-- ProductCard
-- Product Types
-
-หมายเหตุ:
-มี animation แบบ stagger children
-==================================================
-*/
-
 "use client";
-
 import { motion } from "framer-motion";
-import { Product } from "@/src/types";
+
+import type { JSX } from "react";
+import type { Product } from "@/src/types";
 import { ProductCard } from "./ProductCard";
 
-/**
- * ชั้นวางสินค้า
- *
- * จุดประสงค์: แสดงรายการสินค้าในรูปแบบ Grid พร้อม animation
- * Input: title, products, onAddToCart, onToggleWishlist, wishlist, renderStars, onViewProduct
- * Output: JSX Element
- */
 export function ProductShelf({
   title = "สินค้า",
   products,
@@ -45,7 +19,7 @@ export function ProductShelf({
   onAddToCart: (p: Product, c: string) => void;
   onToggleWishlist: (id: string) => void;
   wishlist: string[];
-  renderStars: (r: number) => React.ReactNode;
+  renderStars: (r: number) => JSX.Element[];
   onViewProduct?: (p: Product) => void;
 }) {
   return (
@@ -60,7 +34,7 @@ export function ProductShelf({
           </p>
         </div>
         <div className="text-sm font-bold text-[var(--color-text-secondary)] hidden sm:block">
-          เลือกสี {"\u00B7"} หยิบใส่ตะกร้า {"\u00B7"} ชำระเงิน
+          เลือกสี · หยิบใส่ตะกร้า · ชำระเงิน
         </div>
       </div>
       <motion.div
@@ -99,3 +73,4 @@ export function ProductShelf({
     </section>
   );
 }
+

@@ -1,34 +1,8 @@
-/*
-==================================================
-ไฟล์: components/features/home/HeroMall.tsx
-
-หน้าที่:
-แสดง Hero Section หน้าแรกของร้านค้า
-
-ใช้สำหรับ:
-- หน้า Home
-- โปรโมชันและแคมเปญ
-
-ทำงานร่วมกับ:
-- BeautyShopApp
-- Utils (getImageSrc, formatMoney)
-
-หมายเหตุ:
-มี PromoCard เป็น Sub-component
-==================================================
-*/
-
 "use client";
+import { formatMoney } from "@/src/utils";
 
-import { getImageSrc, formatMoney } from "@/src/utils";
+import { getImageSrc } from "@/src/utils";
 
-/**
- * Hero Section หน้าแรก
- *
- * จุดประสงค์: ดึงดูดผู้ใช้ด้วยภาพและข้อความโปรโมชัน
- * Input: setView, freeShippingThreshold
- * Output: JSX Element
- */
 export function HeroMall({
   setView,
   freeShippingThreshold,
@@ -50,18 +24,18 @@ export function HeroMall({
           <div className="min-w-0">
             <div className="hero-kicker">
               <span>Rosy Edit</span>
-              <span>{"\u2022"}</span>
+              <span>•</span>
               <span>soft luxury</span>
             </div>
             <div className="flex flex-wrap items-center gap-2 md:flex-nowrap">
               <span className="soft-badge shrink-0">
-                {"\u2728"} Best Seller
+                ✨ Best Seller
               </span>
               <span className="soft-badge shrink-0">
-                {"\uD83D\uDE9A"} ส่งฟรี
+                🚚 ส่งฟรี
               </span>
               <span className="soft-badge shrink-0">
-                {"\uD83C\uDF9F"} สมาชิกลดเพิ่ม
+                🎟 สมาชิกลดเพิ่ม
               </span>
             </div>
             <h2 className="mt-5 text-4xl md:text-5xl font-display leading-tight text-[var(--color-text)]">
@@ -76,10 +50,10 @@ export function HeroMall({
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <button className="btn btn-primary" onClick={() => setView("shop")}>
-                ช้อป rosy picks {"\u2192"}
+                ช้อป rosy picks →
               </button>
               <button className="btn btn-secondary" onClick={() => setView("wishlist")}>
-                {"\u2661"} เซฟลุคโปรด
+                ♡ เซฟลุคโปรด
               </button>
             </div>
           </div>
@@ -133,13 +107,6 @@ export function HeroMall({
   );
 }
 
-/**
- * การ์ดโปรโมชันขนาดเล็ก
- *
- * จุดประสงค์: แสดงโปรโมชันแบบการ์ด
- * Input: title, text, tone ("dark" | "gold")
- * Output: JSX Element
- */
 function PromoCard({
   title,
   text,
@@ -166,3 +133,4 @@ function PromoCard({
     </div>
   );
 }
+

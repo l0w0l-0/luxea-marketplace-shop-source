@@ -1,0 +1,4 @@
+cd beauty-studio
+ืnpm i
+npm install next react react-dom
+npm run dev

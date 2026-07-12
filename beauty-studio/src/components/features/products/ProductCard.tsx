@@ -1,40 +1,11 @@
-/*
-==================================================
-ไฟล์: components/features/products/ProductCard.tsx
-
-หน้าที่:
-แสดงข้อมูลสินค้าในรูปแบบ Card
-
-ใช้สำหรับ:
-- หน้า Home
-- หน้าหมวดหมู่สินค้า
-- หน้าค้นหา
-- หน้า Wishlist
-
-ทำงานร่วมกับ:
-- ProductVisual
-- StarRating
-- Product Types
-
-หมายเหตุ:
-รองรับ Responsive และมี Badge สินค้า
-==================================================
-*/
-
 "use client";
+import { motion } from "framer-motion";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Product } from "@/src/types";
+import type { JSX } from "react";
+import type { Product } from "@/src/types";
 import { ProductVisual } from "./ProductVisual";
 
-/**
- * การ์ดแสดงสินค้า
- *
- * จุดประสงค์: แสดงข้อมูลสินค้าแบบ Card พร้อมเลือกสีและเพิ่มตะกร้า
- * Input: product, onAddToCart, onToggleWishlist, isWishlisted, renderStars, onViewProduct
- * Output: JSX Element
- */
 export function ProductCard({
   product,
   onAddToCart,
@@ -47,7 +18,7 @@ export function ProductCard({
   onAddToCart: (p: Product, c: string) => void;
   onToggleWishlist: (id: string) => void;
   isWishlisted: boolean;
-  renderStars: (r: number) => React.ReactNode;
+  renderStars: (r: number) => JSX.Element[];
   onViewProduct?: (p: Product) => void;
 }) {
   const [selectedColor, setSelectedColor] = useState<string>(
@@ -101,7 +72,7 @@ export function ProductCard({
             onToggleWishlist(product.id);
           }}
         >
-          {isWishlisted ? "\u2764\uFE0F" : "\uD83E\uDD0D"}
+          {isWishlisted ? "❤️" : "🤍"}
         </button>
       </div>
       <div className="p-6">
@@ -112,7 +83,7 @@ export function ProductCard({
           <div className="flex items-center gap-2">
             {renderStars(product.rating)}
             <span className="text-xs text-[var(--color-text-secondary)]">
-              {product.rating.toFixed(1)} {"\u00B7"} {product.reviewCount}
+              {product.rating.toFixed(1)} · {product.reviewCount}
             </span>
           </div>
         </div>
@@ -168,7 +139,7 @@ export function ProductCard({
             </span>
           </div>
           <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
-            {selectedColorOption.undertone ?? "Neutral"} {"\u00B7"}{" "}
+            {selectedColorOption.undertone ?? "Neutral"} ·{" "}
             {selectedColorOption.finish ?? "Soft Finish"}
           </p>
         </div>
@@ -176,7 +147,7 @@ export function ProductCard({
         <div className="mt-5 flex items-center justify-between gap-4">
           <div className="price-pill">
             <p className="text-2xl font-black text-[var(--color-primary)]">
-              {"\u0E3F"}{product.price}
+              ฿{product.price}
             </p>
           </div>
           <button
@@ -191,3 +162,4 @@ export function ProductCard({
     </motion.article>
   );
 }
+

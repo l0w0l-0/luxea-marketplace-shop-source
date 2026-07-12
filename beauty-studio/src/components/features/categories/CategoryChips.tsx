@@ -1,31 +1,5 @@
-/*
-==================================================
-ไฟล์: components/features/categories/CategoryChips.tsx
-
-หน้าที่:
-แสดงหมวดหมู่สินค้าในรูปแบบ Chips
-
-ใช้สำหรับ:
-- หน้า Home
-- หน้า Shop
-
-ทำงานร่วมกับ:
-- BeautyShopApp
-
-หมายเหตุ:
-รองรับ Scroll แนวนอนบนมือถือ
-==================================================
-*/
-
 "use client";
 
-/**
- * Chips หมวดหมู่สินค้า
- *
- * จุดประสงค์: ให้ผู้ใช้เลือกหมวดหมู่สินค้า
- * Input: categories, activeCategory, setCategory
- * Output: JSX Element
- */
 export function CategoryChips({
   categories,
   activeCategory,
@@ -61,3 +35,4 @@ export function CategoryChips({
     </section>
   );
 }
+

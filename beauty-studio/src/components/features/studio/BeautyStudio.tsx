@@ -1,32 +1,7 @@
-/*
-==================================================
-ไฟล์: components/features/studio/BeautyStudio.tsx
-
-หน้าที่:
-LUXEA Beauty Studio - เลือกสีเครื่องสำอาง
-
-ใช้สำหรับ:
-- หน้า Studio
-
-ทำงานร่วมกับ:
-- BeautyShopApp
-
-หมายเหตุ:
-เป็นฟีเจอร์เสริมสำหรับลองสีเครื่องสำอาง
-==================================================
-*/
-
 "use client";
 
 import { useState } from "react";
 
-/**
- * Beauty Studio - เลือกสีเครื่องสำอาง
- *
- * จุดประสงค์: ให้ผู้ใช้ลองเลือกสีเครื่องสำอาง
- * Input: ไม่มี Props
- * Output: JSX Element
- */
 export function BeautyStudio() {
   const [makeup, setMakeup] = useState({
     lipstick: "#D96483",
@@ -61,14 +36,16 @@ export function BeautyStudio() {
   return (
     <section className="glass-xl p-8">
       <h2 className="text-3xl font-display text-[var(--color-primary)] mb-8">
-        {"\uD83D\uDC84"} LUXEA Beauty Studio
+        💄 LUXEA Beauty Studio
       </h2>
       <div className="grid gap-8 lg:grid-cols-[1fr_400px]">
+        {/* Left: Preview */}
         <div className="bg-white rounded-[var(--radius-2xl)] p-8 flex items-center justify-center">
           <div className="relative w-full max-w-md h-80 bg-gradient-to-br from-[var(--color-primary-100)] to-[var(--color-accent-100)] rounded-[var(--radius-2xl)] flex items-center justify-center">
-            <span className="text-9xl">{"\uD83D\uDC84"}</span>
+            <span className="text-9xl">💄</span>
           </div>
         </div>
+        {/* Right: Controls */}
         <div className="space-y-6">
           <h3 className="text-xl font-bold text-[var(--color-text)]">
             เลือกสีเครื่องสำอาง

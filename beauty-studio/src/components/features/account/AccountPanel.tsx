@@ -1,38 +1,13 @@
-/*
-==================================================
-ไฟล์: components/features/account/AccountPanel.tsx
-
-หน้าที่:
-แสดงหน้าบัญชีผู้ใช้และฟอร์มล็อกอิน/สมัครสมาชิก
-
-ใช้สำหรับ:
-- หน้า Account
-
-ทำงานร่วมกับ:
-- BeautyShopApp
-- TextInput, PhoneInput Components
-- User, Order Types
-
-หมายเหตุ:
-มีทั้งโหมด Login และ Register
-==================================================
-*/
-
 "use client";
+import { useState } from "react";
 
-import { useState, FormEvent } from "react";
-import { User, Order } from "@/src/types";
+import type { FormEvent } from "react";
+import type { User, Order } from "@/src/types";
+import { formatMoney, formatOrderStatus } from "@/src/utils";
 import { TextInput } from "@/src/components/common/TextInput";
 import { PhoneInput } from "@/src/components/common/PhoneInput";
-import { formatOrderStatus } from "@/src/utils";
+import { Stat } from "@/src/components/common/Stat";
 
-/**
- * หน้าบัญชีผู้ใช้
- *
- * จุดประสงค์: แสดงข้อมูลผู้ใช้, ออเดอร์, และฟอร์มล็อกอิน/สมัคร
- * Input: user, orders, loginForm, registerForm, setLoginForm, setRegisterForm, onLogin, onRegister, setView, onLogout
- * Output: JSX Element
- */
 export function AccountPanel({
   user,
   orders,
@@ -129,7 +104,7 @@ export function AccountPanel({
                         {order.id}
                       </p>
                       <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-                        {order.createdAt} {"\u00B7"} {order.paymentMethod}
+                        {order.createdAt} · {order.paymentMethod}
                       </p>
                     </div>
                     <div className="flex items-center justify-between gap-4 sm:justify-end">
@@ -137,7 +112,7 @@ export function AccountPanel({
                         {formatOrderStatus(order.status)}
                       </span>
                       <span className="text-xl font-black text-[var(--color-primary)]">
-                        {"\u0E3F"}{order.total}
+                        ฿{order.total}
                       </span>
                     </div>
                   </div>
@@ -169,13 +144,13 @@ export function AccountPanel({
           <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-white/70 p-5">
             <p className="text-sm font-bold text-[var(--color-text)]">ลูกค้า</p>
             <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
-              ช้อปสินค้า {"\u00B7"} Wishlist {"\u00B7"} รีวิว {"\u00B7"} ชำระเงิน
+              ช้อปสินค้า · Wishlist · รีวิว · ชำระเงิน
             </p>
           </div>
           <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-white/70 p-5">
             <p className="text-sm font-bold text-[var(--color-text)]">แอดมิน</p>
             <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
-              จัดการสต็อก {"\u00B7"} ดูออเดอร์ {"\u00B7"} ตรวจสถานะ
+              จัดการสต็อก · ดูออเดอร์ · ตรวจสถานะ
             </p>
           </div>
         </div>
@@ -283,20 +258,3 @@ export function AccountPanel({
   );
 }
 
-/**
- * แสดงสถิติแบบ Card
- *
- * จุดประสงค์: แสดงข้อมูลสถิติในรูปแบบ Card เล็ก
- * Input: label, value
- * Output: JSX Element
- */
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="glass p-6">
-      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--color-primary)]">
-        {label}
-      </p>
-      <p className="mt-2 text-xl font-bold">{value}</p>
-    </div>
-  );
-}

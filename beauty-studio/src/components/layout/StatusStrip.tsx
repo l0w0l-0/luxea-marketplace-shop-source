@@ -1,33 +1,6 @@
-/*
-==================================================
-ไฟล์: components/layout/StatusStrip.tsx
-
-หน้าที่:
-แสดงสถานะร้านค้าและข้อความแจ้งเตือน
-
-ใช้สำหรับ:
-- แถบสถานะด้านบนของทุกหน้า
-
-ทำงานร่วมกับ:
-- BeautyShopApp
-- Utils (formatMoney)
-
-หมายเหตุ:
-ข้อความแจ้งเตือนจะ disappear อัตโนมัติ
-==================================================
-*/
-
 "use client";
-
 import { formatMoney } from "@/src/utils";
 
-/**
- * แถบสถานะ
- *
- * จุดประสงค์: แสดงข้อความโปรโมชันและข้อความแจ้งเตือน
- * Input: message, freeShippingThreshold, onDismiss
- * Output: JSX Element
- */
 export function StatusStrip({
   message,
   freeShippingThreshold,
@@ -42,10 +15,10 @@ export function StatusStrip({
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-wrap items-center gap-2">
           <span className="inline-flex items-center gap-2 rounded-full bg-[var(--color-primary-50)] px-4 py-2 font-bold text-[var(--color-primary)]">
-            {"\u2705"} คืนเงินหากไม่ตรงปก
+            ✅ คืนเงินหากไม่ตรงปก
           </span>
           <span className="inline-flex items-center gap-2 rounded-full bg-[var(--color-primary-50)] px-4 py-2 font-bold text-[var(--color-primary)]">
-            {"\uD83D\uDE9A"} ส่งฟรีเมื่อครบ {formatMoney(freeShippingThreshold)}
+            🚚 ส่งฟรีเมื่อครบ {formatMoney(freeShippingThreshold)}
           </span>
         </div>
         {message ? (
@@ -59,7 +32,7 @@ export function StatusStrip({
               onClick={onDismiss}
               aria-label="ปิดข้อความแจ้งเตือน"
             >
-              {"\u00D7"}
+              ×
             </button>
           </div>
         ) : null}
@@ -67,3 +40,4 @@ export function StatusStrip({
     </div>
   );
 }
+

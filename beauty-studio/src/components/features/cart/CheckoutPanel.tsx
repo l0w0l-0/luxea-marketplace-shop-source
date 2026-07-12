@@ -1,38 +1,92 @@
-/*
-==================================================
-ไฟล์: components/features/cart/CheckoutPanel.tsx
-
-หน้าที่:
-หน้าชำระเงิน (Checkout)
-
-ใช้สำหรับ:
-- หน้า Checkout
-
-ทำงานร่วมกับ:
-- BeautyShopApp
-- CartItem, Product Types
-- Utils (formatMoney, getImageSrc)
-
-หมายเหตุ:
-รองรับหลายช่องทางชำระเงิน
-==================================================
-*/
-
 "use client";
+import { paymentMethods } from "@/src/data/initialData";
 
-import { CartItem, Product } from "@/src/types";
-import { formatMoney } from "@/src/utils";
-import { CATEGORY_ICONS } from "@/src/constants";
+import { useState } from "react";
+import type { CartItem, Product } from "@/src/types";
+import { getImageSrc, formatMoney } from "@/src/utils";
 
-/**
- * หน้าชำระเงิน
- *
- * จุดประสงค์: แสดงรายการสินค้าและฟอร์มจัดส่ง
- * Input: cart, products, checkoutForm, setCheckoutForm, paymentMethod, setPaymentMethod,
- *        enabledPaymentMethods, summary, freeShippingThreshold, onCheckout,
- *        onUpdateQuantity, onRemove
- * Output: JSX Element
- */
+export function PaymentMethodTabs({
+  value,
+  onChange,
+  methods = paymentMethods,
+}: {
+  value: string;
+  onChange: (next: string) => void;
+  methods?: string[];
+}) {
+  const safeMethods = methods.length ? methods : paymentMethods;
+  const selectedIndex = Math.max(0, safeMethods.indexOf(value));
+  const gliderWidth = `${100 / Math.max(1, safeMethods.length)}%`;
+
+  return (
+    <div className="segmented-control">
+      <div className="tabs">
+        {safeMethods.map((method, index) => {
+          const id = `radio-${index + 1}`;
+          return (
+            <div key={method} className="relative">
+              <input
+                type="radio"
+                id={id}
+                checked={value === method}
+                onChange={() => onChange(method)}
+              />
+              <label className="tab" htmlFor={id}>
+                {method === "Credit Card"
+                  ? "Card"
+                  : method === "Bank Transfer"
+                    ? "Bank"
+                    : "COD"}
+              </label>
+            </div>
+          );
+        })}
+        <span
+          className="glider"
+          style={{
+            width: gliderWidth,
+            transform: `translateX(${selectedIndex * 100}%)`,
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+
+export function PaymentFlipCard() {
+  return (
+    <div className="flip-card">
+      <div className="flip-card-inner">
+        <div className="flip-card-front">
+          <div className="heading_8264">LUXEA</div>
+          <div className="chip">
+            <div className="h-8 w-12 rounded-md bg-gradient-to-br from-[#f6d6a7] to-[#caa36f] shadow" />
+          </div>
+          <div className="contactless">
+            <div className="h-6 w-6 rounded-full border border-white/70" />
+          </div>
+          <div className="logo">
+            <div className="h-8 w-12 rounded-full bg-white/10 ring-1 ring-white/20" />
+          </div>
+          <div className="number">4242 4242 4242 4242</div>
+          <div className="valid_thru">VALID THRU</div>
+          <div className="date_8264">12/29</div>
+          <div className="name">LUXEA MEMBER</div>
+        </div>
+        <div className="flip-card-back">
+          <div className="strip" />
+          <div className="mstrip">
+            <p className="code">123</p>
+          </div>
+          <div className="sstrip" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 export function CheckoutPanel({
   cart,
   products,
@@ -46,7 +100,6 @@ export function CheckoutPanel({
   onCheckout,
   onUpdateQuantity,
   onRemove,
-  isProcessing,
 }: {
   cart: CartItem[];
   products: Product[];
@@ -63,7 +116,7 @@ export function CheckoutPanel({
     shippingMethod: "standard";
   }) => void;
   paymentMethod: string;
-  setPaymentMethod: (value: "Credit Card" | "Bank Transfer" | "Cash On Delivery") => void;
+  setPaymentMethod: (value: string) => void;
   enabledPaymentMethods: Array<
     "Credit Card" | "Bank Transfer" | "Cash On Delivery"
   >;
@@ -82,11 +135,10 @@ export function CheckoutPanel({
     nextQuantity: number,
   ) => void;
   onRemove: (productId: string, colorId: string) => void;
-  isProcessing?: boolean;
 }) {
   const safePaymentMethods = enabledPaymentMethods.length
     ? enabledPaymentMethods
-    : (["Credit Card", "Bank Transfer", "Cash On Delivery"] as Array<
+    : (paymentMethods as Array<
         "Credit Card" | "Bank Transfer" | "Cash On Delivery"
       >);
   const remainingForFreeShip = Math.max(0, freeShippingThreshold - summary.total);
@@ -103,10 +155,10 @@ export function CheckoutPanel({
 
   const paymentMeta = (method: string) => {
     if (method === "Credit Card")
-      return { icon: "\uD83D\uDCB3", title: "Credit / debit card", subtitle: "Visa, Mastercard" };
+      return { icon: "💳", title: "Credit / debit card", subtitle: "Visa, Mastercard" };
     if (method === "Bank Transfer")
-      return { icon: "\uD83C\uDFE6", title: "Bank transfer", subtitle: "โอนเงินผ่านธนาคาร" };
-    return { icon: "\uD83D\uDE9A", title: "Cash on delivery", subtitle: "ชำระเงินปลายทาง" };
+      return { icon: "🏦", title: "Bank transfer", subtitle: "โอนเงินผ่านธนาคาร" };
+    return { icon: "🚚", title: "Cash on delivery", subtitle: "ชำระเงินปลายทาง" };
   };
 
   return (
@@ -121,7 +173,7 @@ export function CheckoutPanel({
           </p>
         </div>
         <div className="text-sm font-bold text-[var(--color-text-secondary)]">
-          LUXEA {"\u00B7"} Secure Checkout
+          LUXEA · Secure Checkout
         </div>
       </div>
 
@@ -215,20 +267,19 @@ export function CheckoutPanel({
 
           <button
             className="btn btn-primary w-full mt-6"
-            disabled={!canCheckout || isProcessing}
-            aria-disabled={!canCheckout || isProcessing}
+            disabled={!canCheckout}
+            aria-disabled={!canCheckout}
             onClick={onCheckout}
           >
-            {isProcessing ? "กำลังดำเนินการ..." : "ยืนยันคำสั่งซื้อ"}
+            ยืนยันคำสั่งซื้อ
           </button>
           <p className="mt-3 text-xs text-[var(--color-text-secondary)]">
-            ชำระเงินปลอดภัย {"\u00B7"} ข้อมูลการจัดส่งใช้เพื่อออกใบจัดส่งและติดตามพัสดุ
+            ชำระเงินปลอดภัย · ข้อมูลการจัดส่งใช้เพื่อออกใบจัดส่งและติดตามพัสดุ
           </p>
         </aside>
 
         <div className="min-w-0 space-y-6">
           <section className="glass p-6">
-            {/* Payment Method Selection */}
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
@@ -242,6 +293,7 @@ export function CheckoutPanel({
                 เลือก 1 วิธี
               </p>
             </div>
+
             <div className="mt-5 space-y-3">
               {safePaymentMethods.map((method) => {
                 const meta = paymentMeta(method);
@@ -282,6 +334,7 @@ export function CheckoutPanel({
                 );
               })}
             </div>
+
             {paymentMethod === "Credit Card" && (
               <div className="mt-6 flex justify-center">
                 <PaymentFlipCard />
@@ -303,6 +356,7 @@ export function CheckoutPanel({
                 {cart.length} รายการ
               </p>
             </div>
+
             {cart.length === 0 ? (
               <div className="mt-5 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-white/70 p-6 text-sm text-[var(--color-text-secondary)]">
                 ตะกร้ายังว่าง
@@ -324,8 +378,21 @@ export function CheckoutPanel({
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex items-start gap-4 min-w-0">
                           <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-[14px] border border-white/60 bg-white/80 shadow-sm">
+                            <div
+                              className="absolute inset-0 opacity-30"
+                              style={{ backgroundColor: product.color }}
+                            />
                             <div className="absolute inset-0 flex items-center justify-center text-lg">
-                              {CATEGORY_ICONS[product.category] || "\uD83D\uDECD\uFE0F"}
+                              {product.category === "Lipstick" && "💄"}
+                              {product.category === "Blush" && "🌸"}
+                              {product.category === "Highlighter" && "✨"}
+                              {product.category === "Foundation" && "🎨"}
+                              {product.category === "Eyeshadow" && "👁️"}
+                              {product.category === "Skincare" && "🧴"}
+                              {product.category === "Eye" && "👁️"}
+                              {product.category === "Setting" && "💨"}
+                              {product.category === "Face" && "🧴"}
+                              {product.category === "Tools" && "🖌️"}
                             </div>
                           </div>
                           <div className="min-w-0">
@@ -344,12 +411,17 @@ export function CheckoutPanel({
                           ลบ
                         </button>
                       </div>
+
                       <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div className="inline-flex w-full sm:w-auto items-center justify-between gap-2 rounded-full border border-[var(--color-border)] bg-white/70 px-3 py-2">
                           <button
                             className="btn btn-secondary h-10 w-10 p-0"
                             onClick={() =>
-                              onUpdateQuantity(item.productId, item.colorId, item.quantity - 1)
+                              onUpdateQuantity(
+                                item.productId,
+                                item.colorId,
+                                item.quantity - 1,
+                              )
                             }
                           >
                             -
@@ -360,7 +432,11 @@ export function CheckoutPanel({
                           <button
                             className="btn btn-secondary h-10 w-10 p-0"
                             onClick={() =>
-                              onUpdateQuantity(item.productId, item.colorId, item.quantity + 1)
+                              onUpdateQuantity(
+                                item.productId,
+                                item.colorId,
+                                item.quantity + 1,
+                              )
                             }
                           >
                             +
@@ -389,6 +465,7 @@ export function CheckoutPanel({
             <h3 className="mt-2 text-xl font-bold text-[var(--color-text)]">
               ข้อมูลจัดส่ง
             </h3>
+
             <div className="mt-5 grid gap-4 md:grid-cols-2">
               <label className="block min-w-0">
                 <span className="text-xs font-bold text-[var(--color-text-secondary)]">
@@ -397,7 +474,9 @@ export function CheckoutPanel({
                 <input
                   className="input mt-2 w-full text-sm text-[var(--color-text)]"
                   value={checkoutForm.shippingName}
-                  onChange={(e) => setCheckoutForm({ ...checkoutForm, shippingName: e.target.value })}
+                  onChange={(e) =>
+                    setCheckoutForm({ ...checkoutForm, shippingName: e.target.value })
+                  }
                   placeholder="ชื่อ-นามสกุล"
                 />
               </label>
@@ -408,11 +487,14 @@ export function CheckoutPanel({
                 <input
                   className="input mt-2 w-full text-sm text-[var(--color-text)]"
                   value={checkoutForm.shippingPhone}
-                  onChange={(e) => setCheckoutForm({ ...checkoutForm, shippingPhone: e.target.value })}
+                  onChange={(e) =>
+                    setCheckoutForm({ ...checkoutForm, shippingPhone: e.target.value })
+                  }
                   placeholder="0XX-XXX-XXXX"
                 />
               </label>
             </div>
+
             <label className="mt-4 block">
               <span className="text-xs font-bold text-[var(--color-text-secondary)]">
                 ที่อยู่
@@ -420,7 +502,9 @@ export function CheckoutPanel({
               <textarea
                 className="input mt-2 w-full px-4 py-3 text-sm text-[var(--color-text)] min-h-[96px]"
                 value={checkoutForm.shippingAddress}
-                onChange={(e) => setCheckoutForm({ ...checkoutForm, shippingAddress: e.target.value })}
+                onChange={(e) =>
+                  setCheckoutForm({ ...checkoutForm, shippingAddress: e.target.value })
+                }
                 placeholder="บ้านเลขที่, ถนน, แขวง/ตำบล, เขต/อำเภอ, จังหวัด, รหัสไปรษณีย์"
               />
             </label>
@@ -431,40 +515,3 @@ export function CheckoutPanel({
   );
 }
 
-/**
- * การ์ดเครดิตจำลอง
- *
- * จุดประสงค์: แสดงตัวอย่างบัตรเครดิต
- * Output: JSX Element
- */
-function PaymentFlipCard() {
-  return (
-    <div className="flip-card">
-      <div className="flip-card-inner">
-        <div className="flip-card-front">
-          <div className="heading_8264">LUXEA</div>
-          <div className="chip">
-            <div className="h-8 w-12 rounded-md bg-gradient-to-br from-[#f6d6a7] to-[#caa36f] shadow" />
-          </div>
-          <div className="contactless">
-            <div className="h-6 w-6 rounded-full border border-white/70" />
-          </div>
-          <div className="logo">
-            <div className="h-8 w-12 rounded-full bg-white/10 ring-1 ring-white/20" />
-          </div>
-          <div className="number">4242 4242 4242 4242</div>
-          <div className="valid_thru">VALID THRU</div>
-          <div className="date_8264">12/29</div>
-          <div className="name">LUXEA MEMBER</div>
-        </div>
-        <div className="flip-card-back">
-          <div className="strip" />
-          <div className="mstrip">
-            <p className="code">123</p>
-          </div>
-          <div className="sstrip" />
-        </div>
-      </div>
-    </div>
-  );
-}

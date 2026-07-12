@@ -1,38 +1,37 @@
-import { NextResponse } from "next/server";
-import { getDatabase, nextId, publicUser } from "@/src/backend/store";
+import { fail, ok } from "@/src/lib/api/response";
+import { hashPassword } from "@/src/lib/auth/password";
+import { createSession } from "@/src/lib/auth/session";
+import { createUser, findUserByEmail, toPublicUser } from "@/src/lib/repositories/users";
 
 export async function POST(request: Request) {
   const { name, email, password } = await request.json();
-  const db = getDatabase();
 
   if (!name || !email || !password) {
-    return NextResponse.json(
-      { message: "Name, email and password are required" },
-      { status: 400 },
-    );
+    return fail("MISSING_FIELDS", "Name, email and password are required", 400);
+  }
+
+  if (String(password).length < 8) {
+    return fail("WEAK_PASSWORD", "Password must be at least 8 characters", 400);
   }
 
   const normalizedEmail = String(email).toLowerCase().trim();
-  const existingUser = db.users.find((user) => user.email === normalizedEmail);
+  const existingUser = await findUserByEmail(normalizedEmail);
 
   if (existingUser) {
-    return NextResponse.json(
-      { message: "This email is already registered" },
-      { status: 409 },
-    );
+    return fail("EMAIL_TAKEN", "This email is already registered", 409);
   }
 
-  const user = {
-    id: nextId("user"),
+  const passwordHash = await hashPassword(String(password));
+  const user = await createUser({
     name: String(name).trim(),
     email: normalizedEmail,
-    password: String(password),
-    role: "customer" as const,
-    tier: "Member" as const,
-    points: 0,
-  };
+    passwordHash,
+  });
 
-  db.users.push(user);
+  await createSession({
+    userId: user.id,
+    role: user.role === "ADMIN" ? "admin" : "customer",
+  });
 
-  return NextResponse.json({ user: publicUser(user) }, { status: 201 });
+  return ok({ user: toPublicUser(user) }, { status: 201 });
 }

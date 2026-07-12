@@ -1,39 +1,10 @@
-/*
-==================================================
-ไฟล์: components/features/products/ProductDetail.tsx
-
-หน้าที่:
-แสดงรายละเอียดสินค้าแบบเต็ม
-
-ใช้สำหรับ:
-- หน้า Product Detail
-
-ทำงานร่วมกับ:
-- BeautyShopApp
-- ProductVisual
-- Product, Review Types
-- Utils (getImageSrc)
-- renderStars
-
-หมายเหตุ:
-มีส่วนรีวิวสินค้าด้านล่าง
-==================================================
-*/
-
 "use client";
 
 import { useState } from "react";
-import { Product, Review } from "@/src/types";
-import { getImageSrc } from "@/src/utils";
-import { renderStars } from "@/src/components/common/StarRating";
+import type { Product, Review } from "@/src/types";
+import { getImageSrc, formatMoney } from "@/src/utils";
+import { ProductVisual } from "./ProductVisual";
 
-/**
- * หน้ารายละเอียดสินค้า
- *
- * จุดประสงค์: แสดงข้อมูลสินค้าครบถ้วน, เลือกสี, เลือกจำนวน, และรีวิว
- * Input: product, onAddToCart, onBuyNow, onToggleWishlist, isWishlisted, reviews, onBack
- * Output: JSX Element
- */
 export function ProductDetail({
   product,
   onAddToCart,
@@ -60,12 +31,13 @@ export function ProductDetail({
 
   return (
     <section className="grid gap-8 lg:grid-cols-[1fr_1fr]">
+      {/* Left: Image and Gallery */}
       <div className="space-y-4">
         <button
           onClick={onBack}
           className="flex items-center gap-2 text-[var(--color-primary)] font-bold mb-4 hover:opacity-80"
         >
-          {"\u2190"} กลับ
+          ← กลับ
         </button>
         <div className="glass-xl rounded-[var(--radius-2xl)] bg-gradient-to-br from-[var(--color-primary-50)] to-white p-6">
           <div className="relative w-full h-96 rounded-[var(--radius-xl)] overflow-hidden">
@@ -87,6 +59,7 @@ export function ProductDetail({
         </div>
       </div>
 
+      {/* Right: Product Info */}
       <aside className="space-y-6 self-start lg:sticky lg:top-24">
         <div className="glass-xl rounded-[var(--radius-2xl)] p-8">
           <div className="flex items-center justify-between mb-4">
@@ -97,7 +70,7 @@ export function ProductDetail({
               className={`wishlist-btn ${isWishlisted ? "active" : ""}`}
               onClick={() => onToggleWishlist(product.id)}
             >
-              {isWishlisted ? "\u2764\uFE0F" : "\uD83E\uDD0D"}
+              {isWishlisted ? "❤️" : "🤍"}
             </button>
           </div>
 
@@ -107,18 +80,25 @@ export function ProductDetail({
 
           <div className="flex items-center gap-3 mb-6">
             <div className="flex items-center gap-1">
-              {renderStars(product.rating)}
+              {Array.from({ length: 5 }, (_, i) => (
+                <span
+                  key={i}
+                  className={`star ${i < Math.round(product.rating) ? "filled" : ""}`}
+                >
+                  ★
+                </span>
+              ))}
             </div>
             <span className="text-sm text-[var(--color-text-secondary)]">
               {product.rating} ({product.reviewCount} reviews)
             </span>
             {product.isPremium && (
-              <span className="badge-premium">{"\u2728"} Premium</span>
+              <span className="badge-premium">✨ Premium</span>
             )}
           </div>
 
           <p className="text-3xl font-black text-[var(--color-primary)] mb-6">
-            {"\u0E3F"}{product.price}
+            ฿{product.price}
           </p>
 
           <p className="text-[var(--color-text-secondary)] mb-6 leading-relaxed">
@@ -178,8 +158,8 @@ export function ProductDetail({
                   {selectedColorOption.name}
                 </p>
                 <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-                  {selectedColorOption.hex} {"\u00B7"} {selectedColorOption.undertone ?? "Neutral"} {"\u00B7"}{" "}
-                  {selectedColorOption.finish ?? "Matte"} {"\u00B7"}{" "}
+                  {selectedColorOption.hex} · {selectedColorOption.undertone ?? "Neutral"} ·{" "}
+                  {selectedColorOption.finish ?? "Matte"} ·{" "}
                   {selectedColorOption.coverage ?? "Medium"}
                 </p>
               </div>
@@ -233,6 +213,7 @@ export function ProductDetail({
           </div>
         </div>
 
+        {/* Reviews Section */}
         <div className="glass-xl rounded-[var(--radius-2xl)] p-8">
           <h2 className="text-2xl font-display text-[var(--color-primary)] mb-6">
             รีวิวลูกค้า ({reviews.length})
@@ -263,7 +244,14 @@ export function ProductDetail({
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
-                      {renderStars(review.rating)}
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <span
+                          key={i}
+                          className={`star ${i < Math.round(review.rating) ? "filled" : ""}`}
+                        >
+                          ★
+                        </span>
+                      ))}
                     </div>
                   </div>
                   <p className="text-[var(--color-text-secondary)] leading-relaxed">
@@ -278,3 +266,4 @@ export function ProductDetail({
     </section>
   );
 }
+

@@ -1,33 +1,7 @@
-/*
-==================================================
-ไฟล์: components/features/home/QuickMenu.tsx
-
-หน้าที่:
-เมนูลัดสำหรับมือถือ
-
-ใช้สำหรับ:
-- หน้า Home (Mobile)
-
-ทำงานร่วมกับ:
-- User Types
-- BeautyShopApp
-
-หมายเหตุ:
-แสดงเฉพาะบนมือถือ
-==================================================
-*/
-
 "use client";
 
-import { User } from "@/src/types";
+import type { User } from "@/src/types";
 
-/**
- * เมนูลัด
- *
- * จุดประสงค์: ให้ผู้ใช้เข้าถึงฟังก์ชันหลักได้เร็วบนมือถือ
- * Input: setView, user
- * Output: JSX Element
- */
 export function QuickMenu({
   setView,
   user,
@@ -36,13 +10,13 @@ export function QuickMenu({
   user: User | null;
 }) {
   const quickMenus = [
-    { label: "ร้านค้า", icon: "\uD83D\uDECD\uFE0F", view: "shop" },
-    { label: "สตูดิโอ", icon: "\uD83D\uDC84", view: "studio" },
-    { label: "รายการโปรด", icon: "\u2764\uFE0F", view: "wishlist" },
-    { label: "ชำระเงิน", icon: "\uD83D\uDED2", view: "checkout" },
-    { label: "บัญชี", icon: "\uD83D\uDC64", view: "account" },
+    { label: "ร้านค้า", icon: "🛍️", view: "shop" },
+    { label: "สตูดิโอ", icon: "💄", view: "studio" },
+    { label: "รายการโปรด", icon: "❤️", view: "wishlist" },
+    { label: "ชำระเงิน", icon: "🛒", view: "checkout" },
+    { label: "บัญชี", icon: "👤", view: "account" },
     ...(user?.role === "admin"
-      ? [{ label: "แอดมิน", icon: "\uD83D\uDEE0\uFE0F", view: "admin" }]
+      ? [{ label: "แอดมิน", icon: "🛠️", view: "admin" }]
       : []),
   ];
   return (
@@ -62,3 +36,4 @@ export function QuickMenu({
     </section>
   );
 }
+

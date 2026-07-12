@@ -52,7 +52,11 @@ Export:
  * ใช้ Math.round เพื่อปัดเศษคะแนน
  * ดาวที่เติมสีใช้ class "star filled"
  */
-export function renderStars(rating: number): React.ReactNode {
+"use client";
+
+import type { JSX } from "react";
+
+export function renderStars(rating: number): JSX.Element[] {
   return Array.from({ length: 5 }, (_, i) => (
     <span
       key={i}

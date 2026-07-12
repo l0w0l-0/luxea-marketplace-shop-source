@@ -217,6 +217,8 @@ export const initialReviews: Review[] = [
   },
 ];
 
+export const paymentMethods = ["Credit Card", "Bank Transfer", "Cash On Delivery"];
+
 export const defaultStoreSettings: StoreSettings = {
   freeShippingThreshold: COMMERCE_CONFIG.freeShippingThreshold,
   shippingFee: COMMERCE_CONFIG.shippingFee,

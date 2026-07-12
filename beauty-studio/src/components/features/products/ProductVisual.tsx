@@ -1,35 +1,8 @@
-/*
-==================================================
-ไฟล์: components/features/products/ProductVisual.tsx
-
-หน้าที่:
-แสดงรูปภาพสินค้าในรูปแบบ Visual Card
-
-ใช้สำหรับ:
-- ProductCard
-- ProductDetail
-
-ทำงานร่วมกับ:
-- Product Types
-- Utils (getImageSrc)
-
-หมายเหตุ:
-มี fallback เมื่อรูปภาพโหลดไม่สำเร็จ
-==================================================
-*/
-
 "use client";
 
-import { Product } from "@/src/types";
+import type { Product } from "@/src/types";
 import { getImageSrc } from "@/src/utils";
 
-/**
- * แสดงรูปภาพสินค้า
- *
- * จุดประสงค์: แสดงรูปภาพสินค้าพร้อม gradient overlay
- * Input: product (Product)
- * Output: JSX Element
- */
 export function ProductVisual({ product }: { product: Product }) {
   return (
     <div className="relative h-56 overflow-hidden bg-gradient-to-br from-[var(--color-primary-50)] via-white to-[var(--color-neutral)]">
@@ -50,3 +23,4 @@ export function ProductVisual({ product }: { product: Product }) {
     </div>
   );
 }
+

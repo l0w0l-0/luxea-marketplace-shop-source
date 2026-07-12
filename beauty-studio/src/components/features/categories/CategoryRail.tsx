@@ -1,32 +1,7 @@
-/*
-==================================================
-ไฟล์: components/features/categories/CategoryRail.tsx
-
-หน้าที่:
-แถบหมวดหมู่สินค้าด้านข้าง (Desktop)
-
-ใช้สำหรับ:
-- หน้า Shop
-
-ทำงานร่วมกับ:
-- CATEGORY_ICONS Constants
-
-หมายเหตุ:
-แสดงเฉพาะบน Desktop (lg:block)
-==================================================
-*/
-
 "use client";
 
-import { CATEGORY_ICONS } from "@/src/constants";
+import type { Product } from "@/src/types";
 
-/**
- * แถบหมวดหมู่ด้านข้าง
- *
- * จุดประสงค์: แสดงหมวดหมู่สินค้าในรูปแบบ Sidebar
- * Input: categories, activeCategory, setCategory
- * Output: JSX Element
- */
 export function CategoryRail({
   categories,
   activeCategory,
@@ -36,6 +11,19 @@ export function CategoryRail({
   activeCategory: string;
   setCategory: (value: string) => void;
 }) {
+  const categoryIcons: Record<string, string> = {
+    ทั้งหมด: "🛍️",
+    Lipstick: "💄",
+    Blush: "🌸",
+    Highlighter: "✨",
+    Foundation: "🧴",
+    Skincare: "🧖‍♀️",
+    Eyeshadow: "🎨",
+    Eye: "👁️",
+    Setting: "💫",
+    Face: "🧴",
+    Tools: "🖌️",
+  };
   return (
     <aside className="glass-xl p-6 hidden lg:block sticky top-24 self-start">
       <h2 className="mb-4 text-sm font-bold text-[var(--color-text)]">
@@ -52,7 +40,7 @@ export function CategoryRail({
                 : "text-[var(--color-text)] hover:bg-[var(--color-primary-50)]"
             }`}
           >
-            <span className="text-lg">{CATEGORY_ICONS[item] || "\uD83D\uDECD\uFE0F"}</span>
+            <span className="text-lg">{categoryIcons[item] || "🛍️"}</span>
             {item}
           </button>
         ))}
@@ -60,3 +48,4 @@ export function CategoryRail({
     </aside>
   );
 }
+
