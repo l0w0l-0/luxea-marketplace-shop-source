@@ -5,19 +5,27 @@
 
 **เว็บไซต์ขายเครื่องสำอางออนไลน์ ตั้งแต่หน้าร้านสำหรับลูกค้าไปจนถึงระบบหลังบ้านสำหรับแอดมิน**
 
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](#)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](#)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](#)
+[![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)](#)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](#)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](#)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](#)
 
-[![Status](https://img.shields.io/badge/status-in%20development-yellow?style=flat-square)](#)
-[![Responsive](https://img.shields.io/badge/responsive-yes-brightgreen?style=flat-square)](#)
-[![University Project](https://img.shields.io/badge/university%20project-CSI204-blue?style=flat-square)](#)
-[![Version](https://img.shields.io/badge/version-0.1.0-lightgrey?style=flat-square)](#)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](#license)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)](#)
+[![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white)](#)[![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white)](#)
+
+[![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)](#)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](#)
+[![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white)](#)
+[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=postman&logoColor=white)](#)
 
 
-📖 [เอกสารระบบ](#-เอกสารประกอบโครงงาน) ·
+
+[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)](#)
+[![draw.io](https://img.shields.io/badge/draw.io-F08705?style=flat-square&logo=diagramsdotnet&logoColor=white)](#)
+
+
+
+
 
 
 </div>
@@ -25,7 +33,7 @@
 ---
 
 ## 📚 สารบัญ
-
+📖 [เอกสารระบบ](#-เอกสารประกอบโครงงาน) ·
 - [เกี่ยวกับโครงงาน](#-เกี่ยวกับโครงงาน)
 - [ผู้จัดทำ](#-ผู้จัดทำ)
 - [Persona Design](#-persona-design-การออกแบบตัวละครผู้ใช้งานจำลอง)
@@ -171,19 +179,19 @@
 
 **ฝั่ง Frontend**
 
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](#)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](#)
+[![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)](#)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](#)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](#)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](#)
 
-**ฝั่ง Backend (แผนพัฒนาต่อ)**
+**ฝั่ง Backend**
 
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)](#)
 [![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white)](#)
 
-**ฐานข้อมูล (แผนพัฒนาต่อ)**
+**ฐานข้อมูล**
 
-[![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)](#)
+[![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white)](#)
 
 **เครื่องมือที่ใช้ในทีม**
 
@@ -197,7 +205,6 @@
 [![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)](#)
 [![draw.io](https://img.shields.io/badge/draw.io-F08705?style=flat-square&logo=diagramsdotnet&logoColor=white)](#)
 
----
 
 ---
  
@@ -209,10 +216,15 @@
 <img width="1247" height="1242" alt="เเก้ไข use" src="https://github.com/user-attachments/assets/17e14bdd-c9cb-4ba0-aeaa-0148e3337cee" />
 
 ### Class Diagram 
-<img width="8192" height="6664" alt="Supabase_Order_Management-2026-07-24-053013" src="https://github.com/user-attachments/assets/b3ab70c8-d076-4bf8-ab75-501be333a464" />
+<img width="8192" height="5780" alt="Supabase Order Management-2026-07-24-084443" src="https://github.com/user-attachments/assets/497a0de9-970c-4c30-b80c-c02eb0572574" />
+
+[Supabase Order Management-2026-07-24-084725.pdf](https://github.com/user-attachments/files/30339842/Supabase.Order.Management-2026-07-24-084725.pdf)
+
+
 
 ### 🔀 Sequence Diagram
-<img width="594" height="1327" alt="sequence-ecom204" src="https://github.com/user-attachments/assets/b1df131c-f4c5-4db9-963d-a1276fe45318" />
+
+<img width="2008" height="4021" alt="แบบแผนที่ยังไม่ได้ตั้งชื่อ drawio (2)" src="https://github.com/user-attachments/assets/52a09650-f7ae-425c-b1ab-1b5c13339b8f" />
 
 ### SA
 <img width="5582" height="5205" alt="E-commerce_API_Architecture-2026-07-24-054924" src="https://github.com/user-attachments/assets/78f2100a-2400-442f-83c4-56669cb4cc2c" />
